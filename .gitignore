@@ -1,0 +1,42 @@
+# Node.js
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# Build output
+/dist
+/build
+
+# Dependency directories
+bower_components/
+
+# IDEs and text editors
+.vscode/
+.idea/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# MacOS system files
+.AppleDouble
+.LSOverride
+
+# Windows system files
+Desktop.ini
+$RECYCLE.BIN/
+
+# npm package lock file (optional)
+package-lock.json
+
+# Test coverage
+coverage/
+
+# Docker
+docker-compose.override.yml

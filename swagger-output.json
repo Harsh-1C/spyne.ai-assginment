@@ -1,0 +1,344 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Car Management Application API",
+    "description": "This API allows users to manage car records including creating, updating, deleting, and searching cars, as well as handling user authentication.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/v1/create-car": {
+      "post": {
+        "description": "Endpoint to create a new car record. Users need to be authenticated to use this endpoint.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Car details to create a new entry.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Title of the car.",
+                  "example": "2024 Tesla Model S"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Detailed description of the car.",
+                  "example": "A premium electric sedan with long range and fast charging."
+                },
+               "tags": {
+                  "type": "object",
+                  "description": "Tags related to the car.",
+                  "properties": {
+                    "car_type": {
+                      "type": "string",
+                      "description": "Type of the car.",
+                      "example": "sedan"
+                    },
+                    "company": {
+                      "type": "string",
+                      "description": "Car manufacturing company.",
+                      "example": "Tesla"
+                    },
+                    "dealer": {
+                      "type": "string",
+                      "description": "Name of the dealer.",
+                      "example": "Tesla Authorized Dealer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Car created successfully."
+          },
+          "400": {
+            "description": "Invalid input provided."
+          },
+          "401": {
+            "description": "Unauthorized access."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/v1/product/update-car/{carId}": {
+      "post": {
+        "description": "Endpoint to update an existing car record. Authentication is required.",
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the car to update."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated car details.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Updated title of the car.",
+                  "example": "2025 Tesla Model X"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Updated description of the car.",
+                  "example": "A spacious electric SUV with enhanced range and performance."
+                },
+                "images": {
+                  "type": "array",
+                  "description": "Array of image URLs related to the car.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "example": ["https://example.com/car1.jpg", "https://example.com/car2.jpg"]
+                },
+               "tags": {
+                  "type": "object",
+                  "description": "Tags related to the car.",
+                  "properties": {
+                    "car_type": {
+                      "type": "string",
+                      "description": "Type of the car.",
+                      "example": "sedan"
+                    },
+                    "company": {
+                      "type": "string",
+                      "description": "Car manufacturing company.",
+                      "example": "Tesla"
+                    },
+                    "dealer": {
+                      "type": "string",
+                      "description": "Name of the dealer.",
+                      "example": "Tesla Authorized Dealer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Car updated successfully."
+          },
+          "400": {
+            "description": "Invalid input or car ID."
+          },
+          "401": {
+            "description": "Unauthorized access."
+          },
+          "404": {
+            "description": "Car not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/v1/product/delete-car/{carId}": {
+      "get": {
+        "description": "Endpoint to delete a specific car by ID. Authentication is required.",
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the car to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Car deleted successfully."
+          },
+          "400": {
+            "description": "Invalid car ID."
+          },
+          "401": {
+            "description": "Unauthorized access."
+          },
+          "404": {
+            "description": "Car not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/v1/product/search-car": {
+      "get": {
+        "description": "Endpoint to search for cars using a keyword. This is a public endpoint.",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "type": "string",
+            "description": "Keyword to search for cars.",
+            "example": "Tesla"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results returned successfully."
+          },
+          "400": {
+            "description": "Invalid input."
+          },
+          "401": {
+            "description": "Unauthorized access."
+          },
+          "404": {
+            "description": "No cars found matching the criteria."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/v1/product/all-car": {
+      "get": {
+        "description": "Endpoint to retrieve all available car records. Authentication may be required.",
+        "responses": {
+          "200": {
+            "description": "List of all cars retrieved successfully."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "Unauthorized access."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/api/v1/product/get-car-detail/{carId}": {
+      "get": {
+        "description": "Endpoint to get detailed information about a specific car by its ID.",
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the car to retrieve details for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Car details retrieved successfully."
+          },
+          "400": {
+            "description": "Invalid car ID."
+          },
+          "401": {
+            "description": "Unauthorized access."
+          },
+          "404": {
+            "description": "Car not found."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+  
+    "/api/v1/user/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "208": {
+            "description": "Already Reported"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/user/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
