@@ -5,13 +5,26 @@
     "description": "This API allows users to manage car records including creating, updating, deleting, and searching cars, as well as handling user authentication.",
     "version": "1.0.0"
   },
-  "host": "spyne-ai-assginment.onrender.com",
+  "host": "https://spyne-ai-assginment.onrender.com",
   "basePath": "/",
   "schemes": [
+    "http",
     "https"
   ],
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
   "paths": {
-    "/api/v1/create-car": {
+    "/api/v1/product/create-car": {
       "post": {
         "description": "Endpoint to create a new car record. Users need to be authenticated to use this endpoint.",
         "parameters": [
