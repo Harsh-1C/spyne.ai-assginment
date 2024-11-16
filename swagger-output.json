@@ -5,7 +5,7 @@
     "description": "This API allows users to manage car records including creating, updating, deleting, and searching cars, as well as handling user authentication.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
     "http"
