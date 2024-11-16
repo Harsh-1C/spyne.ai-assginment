@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
  const registerController = async (req, res) => {
   try {
     const { email, password, name } = req.body;
-    const exisitingUser = await userModel.findOne({ email });
+    const exisitingUser = await userModel.findOne({ email });    
     if (exisitingUser) {
       return res
         .status(200)

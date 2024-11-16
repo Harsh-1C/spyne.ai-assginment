@@ -14,17 +14,17 @@ const app = express();
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+// app.use(cors())
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use("/api/v1/user", require("./routes/user.routes.js"));
 app.use("/api/v1/product", require("./routes/product.routes.js"));
 
-app.use(express.static(path.join(__dirname, "./client/dist")));
+app.use(express.static(path.join(__dirname, "./client/build")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
 //port
