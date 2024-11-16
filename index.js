@@ -6,6 +6,7 @@ const connectDB = require("./config/db.js");
 const swaggerUi = require("swagger-ui-express");
 const path = require("path");
 const swaggerDocument = require("./swagger-output.json");
+const cors = require('cors');
 
 connectDB();
 
@@ -14,7 +15,7 @@ const app = express();
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(cors())
+app.use(cors())
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
