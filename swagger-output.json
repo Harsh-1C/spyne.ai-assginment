@@ -8,7 +8,7 @@
   "host": "spyne-ai-assginment.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/api/v1/create-car": {
